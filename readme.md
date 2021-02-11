@@ -2,12 +2,10 @@
 
 ![Imagen](./imges/muestra.png)
 
-https://stoic-banach-562cfe.netlify.app/
+https://inspiring-heisenberg-ade32d.netlify.app/
 
 
-
-
-https://sosan.github.io/init_js_05/
+https://sosan.github.io/init_js_control_01/
 
 
 
