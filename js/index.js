@@ -34,10 +34,10 @@ let alcanzadameta4 = false;
 //para cambiar solo tendremos que cambiar desde aqui
 const eventoskeys =
 {
-    Frenar: [ "ArrowUp", "w" ],
-    Acelerar: ["ArrowDown", "s"],
-    Izquierda: ["ArrowLeft", "a"],
-    Derecha: ["ArrowRight", "d"],
+    Frenar: [ "arrowup", "w" ],
+    Acelerar: ["arrowdown", "s"],
+    Izquierda: ["arrowleft", "a"],
+    Derecha: ["arrowright", "d"],
     Claxon: " "
 }
 
