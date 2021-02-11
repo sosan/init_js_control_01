@@ -1,6 +1,6 @@
 ## Web Link
 
-![Imagen](./imges/muestra.png)
+![Imagen](./images/muestra.png)
 
 https://inspiring-heisenberg-ade32d.netlify.app/
 
