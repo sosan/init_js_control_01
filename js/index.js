@@ -79,6 +79,11 @@ const estrella_uno = document.getElementById("estrella-uno");
 const estrella_dos = document.getElementById("estrella-dos");
 const estrella_tres = document.getElementById("estrella-tres");
 
+//sonido claxon
+const claxon_sonido = document.getElementById("claxon");
+
+//checkbox de autoscroll
+const autoscroll_onoff = document.getElementById("check-autoscroll");
 
 //funcion que es llamada cuando hemos terminado la carrera
 //pasa toda  la leyenda a color negro
@@ -129,6 +134,9 @@ const Claxon = (elemento) =>
     //colorizamos la leyenda cuando se ha pulsado
     colorizar_leyenda(elemento);
 
+    claxon_sonido.currentTime = 0;
+    claxon_sonido.play();
+
 };
 
 
@@ -136,9 +144,16 @@ const Claxon = (elemento) =>
 //funcion donde controla el movimiento hacia atras del coche
 const Frenar = (elemento) => 
 {
+
+
     //colorizamos la leyenda cuando se ha pulsado
     colorizar_leyenda(elemento);
 
+    //que se salga el coche por arriba
+    if (posicion_coche_y <= POSICION_INICIAL)
+    {
+        return;
+    }
     // movimiento del coche
     posicion_coche_y -= 10;
     cocheimagen.style.transform = `translate(${posicion_coche_x}px, ${posicion_coche_y}px)`;
@@ -330,7 +345,7 @@ document.addEventListener("keyup", (evento) =>
             descolorizar_leyanda(leyenda_derecha);
         break;
 
-        case eventoskeys.Claxon[0]: //espacio
+        case eventoskeys.Claxon: //espacio
             descolorizar_leyanda(leyenda_claxon);
         break;
 
@@ -410,8 +425,12 @@ document.addEventListener("keydown", (evento) =>
             Derecha(leyenda_derecha);
         break;
 
-        case eventoskeys.Claxon[0]: //espacio
-            Claxon(leyenda_claxon);
+        case eventoskeys.Claxon: //espacio
+            //evitamos que se pulse continuamente
+            if (evento.repeat === false)
+            {
+                Claxon(leyenda_claxon);
+            }
         break;
 
         // si se sale de lo establecido simplemente no continuamos
@@ -425,11 +444,21 @@ document.addEventListener("keydown", (evento) =>
     //mostramos la posicion del coche
     cocheimagen.style.transform = `translate(${posicion_coche_x}px, ${posicion_coche_y}px)`;
 
+
+    //en caso de que el autoscroll este activado
+    if (autoscroll_onoff.checked === true) 
+    {
+        //auto scroll donde esta el coche
+        window.scrollTo({
+            top: posicion_coche_y - POSICION_INICIAL * 2,
+            left: posicion_coche_x,
+        });
+
+    }
+
+
+
     // seguimos al coche cuando acelera, scroll automatico
-    window.scrollTo({
-        top: posicion_coche_y - POSICION_INICIAL * 2,
-        left: posicion_coche_x,
-    });
 
 });
 
@@ -441,7 +470,22 @@ window.addEventListener("scroll", () =>
     comprobar_posiciones_coche(scrollY);
 });
 
-//seguimos el movimiento del coche
+
+
+//funcion que en caso que detecte un click sobre el label o sobre
+//el input, desplaza el scroll hasta el coche
+autoscroll_onoff.addEventListener("click", ()=>
+{
+    window.scrollTo({
+        top: posicion_coche_y - POSICION_INICIAL * 2,
+        left: posicion_coche_x,
+    });
+
+});
+
+
+
+//atrasamos un poco el scroll inicial sobre el coche
 window.scrollTo({
     top: posicion_coche_y - POSICION_INICIAL * 2,
     left: posicion_coche_x

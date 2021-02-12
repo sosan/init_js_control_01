@@ -170,3 +170,21 @@ body
 {
     display: block;
 }
+
+
+.leyenda-checkbox
+{
+
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.texto-box
+{
+    width: 20px;
+    height: 20px;
+    border: 1px solid;
+    appearance: auto;
+
+}
