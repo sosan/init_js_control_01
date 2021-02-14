@@ -82,6 +82,11 @@ const estrella_tres = document.getElementById("estrella-tres");
 //sonido claxon
 const claxon_sonido = document.getElementById("claxon");
 
+//sonido golpe
+const golpe_sonido = document.getElementById("golpe");
+
+let golpeado = false;
+
 //checkbox de autoscroll
 const autoscroll_onoff = document.getElementById("check-autoscroll");
 
@@ -181,9 +186,18 @@ const Izquierda = (elemento) =>
     //controlamos los limites de la carretera
     if (posicion_coche_x <= rango_carretera.izquierda)
     {
+        //para que no se repita el sonido
+        if (golpeado === false) 
+        {
+            golpeado = true;
+            golpe_sonido.currentTime = 0;
+            golpe_sonido.play();
+
+        }
         return;
     }
     
+    golpeado = false;
     //colorizamos la leyenda cuando se ha pulsado
     colorizar_leyenda(elemento);
 
@@ -212,10 +226,18 @@ const Derecha = (elemento) =>
     //limite del coche
     if (posicion_coche_x >= rango_carretera.derecha) 
     {
-        //todo: 
+        //para que no se repita el sonido
+        if (golpeado === false)
+        {
+            golpeado = true;
+            golpe_sonido.currentTime = 0;
+            golpe_sonido.play();
+
+        }
         return;
     }
 
+    golpeado = false;
     //colorizamos la leyenda cuando se ha pulsado
     colorizar_leyenda(elemento);
 
